@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+  {% block body_block %}
+
+    <h2>Client Info</h2>
+    <!--message flashing-->
+
+    <div class="info">
+
+      {% csrf_token %}
+      {% if instance %}
+      <table class="table">
+        <thead>
+          <th scope="col">First Name</th>
+          <th scope="col"> &nbsp Last Name</th>
+          <th scope="col"> &nbsp Date of Birth </th>
+          <th scope="col"> &nbsp Gender </th>
+          <th scope="col"> &nbsp E-mail </th>
+          <th scope="col"> &nbsp address 1 </th>
+          <th scope="col"> &nbsp address 2 </th>
+          <th scope="col"> &nbsp Landline No.</th>
+          <th scope="col"> &nbsp Cell Phone No.</th>
+          <th scope="col"> &nbsp Room Type </th>
+          <th scope="col"> &nbsp Room Number </th>
+
+        </thead>
+
+          <tr>
+              <td scope="row">{{instance.first_name}}</td>
+              <td scope="row">{{instance.last_name}}</td>
+              <td scope="row">{{instance.dob}}</td>
+              <td scope="row">{{instance.gender}}</td>
+              <td scope="row">{{instance.email}}</td>
+              <td scope="row">{{instance.address1}}</td>
+              <td scope="row">{{instance.address2}}</td>
+              <td scope="row">{{instance.phone}}</td>
+              <td scope="row">{{instance.mobile}}</td>
+              <td scope="row">{{instance.room_type}}</td>
+              <td scope="row">{{instance.room_number}}</td>
+
+          </tr>
+        {% endif %}
+</table>
+
+
+      {% endblock %}

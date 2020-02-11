@@ -1,0 +1,28 @@
+body{
+  background-image: url("images/hotel.png");
+}
+
+.logo{
+  height : 20%;
+    width : 20%;
+    margin-top: 5px;
+}
+
+
+div.scrollmenu {
+
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+
+}

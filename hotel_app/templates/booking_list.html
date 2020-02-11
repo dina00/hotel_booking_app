@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+  {% block body_block %}
+
+    <h2>Bookings List</h2>
+    <!--message flashing-->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+<br>
+    <div class="records">
+
+      {% csrf_token %}
+      {% if bookings %}
+
+        <table class="table">
+        <thead>
+          <th scope="col">Check-in</th>
+          <th scope="col"> &nbsp Check-out</th>
+          <th scope="col"> &nbsp Client </th>
+          <th scope="col"> &nbsp Number of Rooms </th>
+          <th scope="col"> &nbsp Update </th>
+          <th scope="col"> &nbsp Delete</th>
+        </thead>
+        {% for i in bookings %}
+          <tr>
+              <td scope="row">{{i.check_in}}</td>
+              <td scope="row"> &nbsp {{i.check_out}}</td>
+              <td scope="row">&nbsp &nbsp<a href="{% url 'hotel_app:client_display_info' i.client_id.id %}">{{i.client_id.first_name}}</a></td>
+              <td scope="row"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{i.number_of_rooms}}</td>
+              <td scope="row">&nbsp &nbsp<a href="{% url 'hotel_app:book_update' i.id %}" class="btn btn-info">update</a></td>
+              <td scope="row">&nbsp &nbsp<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal{{i.id}}">delete</a></td>
+
+              <div class="modal fade in" id="delete-modal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-body">
+                       <p>You are about to delete a record {{i.client_id.first_name}}. Do you want to continue?</p>
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                       <a href="{% url 'hotel_app:book_delete' i.id %}" class="btn btn-danger" type="button">Yes</a>
+                     </div>
+                   </div>
+                   <!-- /.modal-content -->
+                 </div>
+                 <!-- /.modal-dialog -->
+               </div>
+          </tr>
+          {% endfor %}
+      </table>
+      {% else %}
+          <p>no records found</p>
+        {% endif %}
+      </br></br></br>
+     <a href="{% url 'hotel_app:book_add' %}"><input type="submit" class="btn btn-primary" value="Add a Booking"></a>
+      </div>
+      {% endblock %}

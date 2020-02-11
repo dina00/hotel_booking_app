@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+{% load static %}
+  {% block body_block %}
+<head><link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+  <div class="jumbotron">
+
+  {% if request.user.is_authenticated %}
+   <h1>Hi Welcome {{ request.user.username|title}}</h1>
+{% else %}
+<h1>Hi Welcome</h1>
+{% endif %}
+
+</div>
+      {% endblock %}

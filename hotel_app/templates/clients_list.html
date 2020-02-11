@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+{% block body_block %}
+
+<h2>Clients</h2>
+<!--message flashing-->
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+<form action="" method="post">
+  <div class="scrollmenu">
+    <table class="table table-bordered table-striped table-sm">
+      {% csrf_token %}
+      {{ form.management_form }}
+      {% for form in form %}
+      {{ form.id }}
+      {% if forloop.first %}
+      <thead>
+        <tr>
+          {% for field in form.visible_fields %}
+          <th>{{ field.label|capfirst }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      {% endif %}
+      <tr>
+        {% for field in form.visible_fields %}
+        <td>
+          {# exclude the hidden fields in the form #}
+          {% if forloop.first %}
+          {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+          {% endfor %}
+          {% endif %}
+          {{ field.errors.as_ul }}
+          {{ field }}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+      <br>
+    </table>
+  </div>
+  <br>
+  <button type="submit" name="button" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+
+<br><br>
+
+<div class="records">
+
+  {% csrf_token %}
+  {% if clients %}
+  <table class="table">
+    <thead>
+      <th scope="col">First Name</th>
+      <th scope="col"> &nbsp Last Name</th>
+      <th scope="col"> &nbsp Landline No.</th>
+      <th scope="col"> &nbsp Cell Phone No.</th>
+      <th scope="col"> &nbsp Update </th>
+      <th scope="col"> &nbsp Delete</th>
+    </thead>
+    {% for i in clients %}
+    <tbody>
+      <tr>
+        <td scope="row"><a href="{% url 'hotel_app:client_display_info' i.id %}">{{i.first_name}}</a></td>
+        <td scope="row">{{i.last_name}}</td>
+        <td scope="row">&nbsp &nbsp{{i.phone}}</td>
+        <td scope="row">&nbsp &nbsp{{i.mobile}}</td>
+        <td scope="row">&nbsp &nbsp<a href="{% url 'hotel_app:client_update' i.id %}" class="btn btn-info">update</a></td>
+        <td scope="row">&nbsp &nbsp<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal{{i.id}}">delete</a></td>
+
+        <div class="modal fade in" id="delete-modal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>You are about to delete a record. Do you want to continue?</p>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <a href="{% url 'hotel_app:client_delete' i.id %}" class="btn btn-danger" type="button">Yes</a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+      </tr>
+
+    </tbody>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>no records found</p>
+  {% endif %}
+  </br></br></br>
+
+
+
+</div>
+
+
+
+{% endblock %}

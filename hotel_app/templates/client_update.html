@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+  {% block body_block %}
+
+
+  <body>
+      <h1>Fill out the form</h1>
+        <div class='container'>
+          <form method="POST">
+            {{client_form.as_p}}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Submit">
+          </form>
+        </div>
+    </body>
+      {% endblock %}
