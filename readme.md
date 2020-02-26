@@ -14,3 +14,5 @@ This is an application where you can display, add, update, and delete bookings/c
 4.  Run the project 
 `python manage.py runserver`.
 5. Type [http://localhost:8000](http://localhost:8000) into your browser's address bar and hit enter.
+### Note 
+- Make sure to clear your cache so that the static file can load properly.
