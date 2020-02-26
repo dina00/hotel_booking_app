@@ -87,18 +87,21 @@ def book_update(request, id):
 
 
 def book_add(request):
+#    req_booking = Booking.objects.all()
+    # roomno=instance.room_number
+    #checkout=instance.check_out
+
     if request.method == "POST":
         book_form = FormBooking(data=request.POST)
         if book_form.is_valid():
-            book = book_form.save()
-            book.save()
+            book_form.save()
             messages.add_message(request, messages.SUCCESS,'Booking was added successfully')
             return redirect('hotel_app:bookings_list')
         else:
             print(book_form.errors)
     else:  # http request
         book_form = FormBooking()
-    return render(request, 'book_update.html', {'book_form': book_form})
+    return render(request, 'book_update.html', {'book_form': book_form,})
 
 
 def book_delete(request, id):

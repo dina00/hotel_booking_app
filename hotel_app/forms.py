@@ -18,10 +18,10 @@ class FormBooking(forms.ModelForm):
 
     class Meta():
         model = Booking
-        fields = ('client_id','check_in','check_out','bed_type', 'special_req', 'start_date', 'end_date', 'number_of_rooms')
+        fields = ('client_id','check_in','check_out','bed_type', 'special_req', 'start_date', 'end_date', 'room_number')
 
 class FormClient(forms.ModelForm):
 
     class Meta():
         model = Client
-        fields = ('first_name', 'last_name', 'dob', 'gender', 'email', 'address1', 'address2', 'phone', 'mobile', 'room_type', 'room_number')
+        fields = ('first_name', 'last_name', 'dob', 'gender', 'email', 'address1', 'address2', 'phone', 'mobile', 'room_type')

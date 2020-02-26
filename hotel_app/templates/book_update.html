@@ -9,6 +9,7 @@
           <form method="POST">
             {{book_form.as_p}}
             {% csrf_token %}
+            
             <input type="submit" class="btn btn-primary" value="Submit">
           </form>
         </div>
